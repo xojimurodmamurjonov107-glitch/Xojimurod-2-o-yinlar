@@ -1,0 +1,276 @@
+/* ==========================================================================
+   BRAIN ARENA - RESPONSIVE DESIGN & MOBILE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Laptop & Tablet Landscape (1024px and down) */
+@media (max-width: 1024px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-search-bar {
+        max-width: 320px;
+    }
+
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+
+    .modes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tablet Portrait (768px and down) */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0.75rem 1rem;
+        gap: 0.75rem;
+    }
+
+    .nav-search-bar {
+        display: none; /* Accessible in mobile via focus or dedicated trigger */
+    }
+
+    .brand-title {
+        font-size: 1.15rem;
+    }
+
+    .brand-subtitle {
+        display: none;
+    }
+
+    .user-pill-name {
+        max-width: 70px;
+    }
+
+    .category-nav-container {
+        padding: 0.5rem 1rem;
+        gap: 0.5rem;
+    }
+
+    .cat-pill {
+        padding: 0.45rem 0.85rem;
+        font-size: 0.8rem;
+    }
+
+    .main-content {
+        padding: 1.25rem 1rem 3rem;
+    }
+
+    .hero-card {
+        padding: 1.5rem;
+    }
+
+    .hero-greeting {
+        font-size: 1.35rem;
+    }
+
+    .hero-avatar {
+        width: 58px;
+        height: 58px;
+        font-size: 2rem;
+    }
+
+    .stats-ribbon {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+    }
+
+    .chess-gm-box {
+        flex-direction: column;
+    }
+
+    .chess-gm-eval-bar {
+        width: 100%;
+        height: 12px;
+    }
+
+    .chess-8x8-board, .sudoku-9x9-grid, .algo-maze-grid {
+        width: 320px;
+        height: 320px;
+    }
+
+    .arena-top-bar {
+        padding: 0.65rem 1rem;
+    }
+
+    .arena-game-meta {
+        gap: 0.5rem;
+    }
+
+    .arena-game-title {
+        font-size: 1rem;
+    }
+
+    .arena-hud {
+        gap: 0.5rem;
+    }
+
+    .hud-box {
+        padding: 0.25rem 0.65rem;
+        min-width: 60px;
+    }
+
+    .hud-value {
+        font-size: 1rem;
+    }
+
+    .arena-playfield {
+        padding: 1.25rem 0.85rem;
+    }
+}
+
+/* Smartphone Portrait (480px and down) */
+@media (max-width: 480px) {
+    .nav-actions {
+        gap: 0.4rem;
+    }
+
+    .icon-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+
+    .user-profile-pill {
+        padding: 0.25rem 0.5rem;
+    }
+
+    .user-pill-info {
+        display: none; /* Icon-only on small mobile screens */
+    }
+
+    .hero-card {
+        padding: 1.25rem;
+    }
+
+    .hero-user-meta {
+        gap: 0.75rem;
+    }
+
+    .hero-greeting {
+        font-size: 1.2rem;
+    }
+
+    .stats-ribbon {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat-cell {
+        padding: 0.65rem;
+    }
+
+    .stat-val {
+        font-size: 1rem;
+    }
+
+    .daily-challenge-card {
+        padding: 1.25rem;
+    }
+
+    .daily-title {
+        font-size: 1.1rem;
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-catalog-card {
+        padding: 1.15rem;
+    }
+
+    /* Game Boards scaling */
+    .chess-8x8-board, .sudoku-9x9-grid, .algo-maze-grid {
+        width: 290px;
+        height: 290px;
+    }
+
+    .gm-sq {
+        font-size: 1.4rem;
+    }
+
+    .s9-cell {
+        font-size: 1rem;
+    }
+
+    .simon-board {
+        width: 230px;
+        height: 230px;
+    }
+
+    .diff-comparison {
+        grid-template-columns: 1fr;
+    }
+
+    .arena-top-bar {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .arena-left {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .arena-hud {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .arena-right {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.25rem;
+    }
+
+    .modal-overlay {
+        padding: 0.75rem;
+    }
+
+    .auth-card, .profile-modal-card, .setup-container, .pause-card, .result-card {
+        padding: 1.5rem;
+    }
+
+    .result-score-stats {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .result-actions, .pause-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .result-actions button, .pause-actions button {
+        width: 100%;
+    }
+
+    .toast-container {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+
+    .toast {
+        min-width: 0;
+        max-width: 100%;
+    }
+}
+
+/* Touch & Accessibility */
+@media (hover: none) and (pointer: coarse) {
+    .btn-play-game, .arena-icon-btn, .cat-pill, .icon-btn, .fav-btn {
+        min-height: 44px;
+    }
+
+    .game-catalog-card:hover {
+        transform: none;
+    }
+}

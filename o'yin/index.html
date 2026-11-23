@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Brain Arena – AI Intelligence Games Platform</title>
+    <meta name="description" content="Brain Arena - 4 ta yosh toifasi, 40 ta haqiqiy o'yin va kuchli AI raqib tizimiga ega intellektual o'yinlar platformasi.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/games.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="theme-dark">
+
+    <!-- App Container -->
+    <div id="app" class="app-layout">
+
+        <!-- Top Navigation Bar -->
+        <header class="app-navbar" id="app-navbar">
+            <div class="nav-container">
+                <div class="nav-brand" id="brand-logo" role="button" tabindex="0">
+                    <div class="brand-icon-wrap">
+                        <span class="brand-icon">🧠</span>
+                        <div class="brand-glow"></div>
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-title">BRAIN<span class="gradient-text">ARENA</span></span>
+                        <span class="brand-subtitle">AI GAMES PLATFORM</span>
+                    </div>
+                </div>
+
+                <!-- Center Search & Filter in Header -->
+                <div class="nav-search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="global-search" placeholder="O‘yinlarni qidirish (masalan: Shaxmat, Sudoku, Ranglar)..." autocomplete="off">
+                    <button id="search-clear-btn" class="search-clear-btn hidden" title="Tozalash">✕</button>
+                </div>
+
+                <!-- Right Nav Actions -->
+                <div class="nav-actions">
+                    <!-- Audio Toggle -->
+                    <button id="sound-toggle-btn" class="icon-btn" title="Ovozni yoqish / o‘chirish" aria-label="Ovoz">
+                        <span id="sound-icon">🔊</span>
+                    </button>
+
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle-btn" class="icon-btn" title="Yorug‘ / Qorong‘i rejim" aria-label="Mavzu">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+
+                    <!-- Achievements Shortcut -->
+                    <button id="achievements-btn" class="icon-btn badge-btn" title="Yutuqlar" aria-label="Yutuqlar">
+                        <span>🏆</span>
+                        <span id="achievements-badge" class="nav-badge hidden">0</span>
+                    </button>
+
+                    <!-- User Profile Pill -->
+                    <div class="user-profile-pill" id="user-profile-btn" role="button" tabindex="0" title="Profilni boshqarish">
+                        <span class="user-pill-avatar" id="nav-user-avatar">🦊</span>
+                        <div class="user-pill-info">
+                            <span class="user-pill-name" id="nav-user-name">Foydalanuvchi</span>
+                            <div class="user-pill-level-wrap">
+                                <span class="user-pill-badge" id="nav-user-level-badge">🌱</span>
+                                <span class="user-pill-xp" id="nav-user-xp">0 XP</span>
+                            </div>
+                        </div>
+                        <span class="user-pill-arrow">▾</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Navigation Bar -->
+            <nav class="category-nav-bar" id="category-navbar">
+                <div class="category-nav-container">
+                    <button class="cat-pill active" data-category="all">
+                        <span class="cat-icon">⚡</span>
+                        <span class="cat-label">Barcha o‘yinlar (40)</span>
+                    </button>
+                    <button class="cat-pill cat-preschool" data-category="preschool">
+                        <span class="cat-icon">🧸</span>
+                        <span class="cat-label">Preschool (3–5 yosh)</span>
+                        <span class="cat-count">10</span>
+                    </button>
+                    <button class="cat-pill cat-kids" data-category="kids">
+                        <span class="cat-icon">🚀</span>
+                        <span class="cat-label">Kids (6–10 yosh)</span>
+                        <span class="cat-count">10</span>
+                    </button>
+                    <button class="cat-pill cat-teens" data-category="teens">
+                        <span class="cat-icon">🧬</span>
+                        <span class="cat-label">Teens (11–15 yosh)</span>
+                        <span class="cat-count">10</span>
+                    </button>
+                    <button class="cat-pill cat-young-adults" data-category="young-adults">
+                        <span class="cat-icon">🌌</span>
+                        <span class="cat-label">Young Adults (16–20+)</span>
+                        <span class="cat-count">10</span>
+                    </button>
+                    <button class="cat-pill cat-favs" data-category="favorites">
+                        <span class="cat-icon">⭐</span>
+                        <span class="cat-label">Sevimli o‘yinlar</span>
+                        <span class="cat-count" id="favs-counter">0</span>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="main-content">
+            
+            <!-- Dashboard View -->
+            <section class="dashboard-section" id="dashboard-section">
+                <!-- Welcome Banner & Daily Challenge -->
+                <div class="hero-grid">
+                    <!-- Left Hero Card -->
+                    <div class="hero-card glass-panel" id="hero-profile-card">
+                        <div class="hero-decor-orb"></div>
+                        <div class="hero-body">
+                            <div class="hero-user-meta">
+                                <div class="hero-avatar-wrap">
+                                    <span class="hero-avatar" id="dash-avatar">🦊</span>
+                                    <button class="avatar-edit-chip" id="edit-avatar-btn" title="Avatarni o‘zgartirish">✏️</button>
+                                </div>
+                                <div class="hero-text-block">
+                                    <div class="hero-greeting">Xush kelibsiz, <span id="dash-username">O‘yinchi</span>!</div>
+                                    <div class="hero-category-tag" id="dash-category-tag">Kids (6–10 yosh)</div>
+                                </div>
+                            </div>
+
+                            <!-- Level & XP Progress Bar -->
+                            <div class="level-progress-container">
+                                <div class="level-meta-row">
+                                    <div class="level-badge-title">
+                                        <span id="dash-level-icon">🌱</span>
+                                        <strong id="dash-level-title">Beginner</strong>
+                                        <span class="level-num-tag" id="dash-level-num">Level 1</span>
+                                    </div>
+                                    <div class="xp-ratio" id="dash-xp-ratio">0 / 300 XP</div>
+                                </div>
+                                <div class="progress-bar-track">
+                                    <div class="progress-bar-fill" id="dash-xp-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Stats Badges Strip -->
+                            <div class="stats-ribbon">
+                                <div class="stat-cell">
+                                    <span class="stat-icon">🔥</span>
+                                    <div class="stat-info">
+                                        <span class="stat-val" id="dash-streak">1 kun</span>
+                                        <span class="stat-lbl">Faollik</span>
+                                    </div>
+                                </div>
+                                <div class="stat-cell">
+                                    <span class="stat-icon">🎮</span>
+                                    <div class="stat-info">
+                                        <span class="stat-val" id="dash-games-count">0</span>
+                                        <span class="stat-lbl">O‘yinlar</span>
+                                    </div>
+                                </div>
+                                <div class="stat-cell">
+                                    <span class="stat-icon">🏆</span>
+                                    <div class="stat-info">
+                                        <span class="stat-val" id="dash-wins-count">0</span>
+                                        <span class="stat-lbl">G‘alabalar</span>
+                                    </div>
+                                </div>
+                                <div class="stat-cell">
+                                    <span class="stat-icon">⭐</span>
+                                    <div class="stat-info">
+                                        <span class="stat-val" id="dash-high-score">0</span>
+                                        <span class="stat-lbl">Rekord</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Daily Challenge Card -->
+                    <div class="daily-challenge-card glass-panel" id="daily-challenge-card">
+                        <div class="daily-card-header">
+                            <span class="daily-badge">⚡ KUNLIK TOPSHIRIQ</span>
+                            <span class="daily-date" id="daily-date-label">Bugun</span>
+                        </div>
+                        <h3 class="daily-title" id="daily-title">Aqliy Chiniqish</h3>
+                        <p class="daily-desc" id="daily-desc">Bugun 3 ta intellektual o‘yinda g‘alaba qozonib, 100 XP bonus oling!</p>
+                        
+                        <div class="daily-progress-row">
+                            <div class="daily-progress-track">
+                                <div class="daily-progress-fill" id="daily-progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span class="daily-progress-num" id="daily-progress-num">0/3</span>
+                        </div>
+
+                        <div class="daily-footer">
+                            <span class="reward-pill" id="daily-reward-pill">+100 XP Bonus</span>
+                            <button class="btn-primary-sm" id="daily-play-btn">Bajarish ➔</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Games Section -->
+                <div class="recent-games-container hidden" id="recent-games-wrap">
+                    <div class="section-header-row">
+                        <h2 class="section-title">⏱️ Oxirgi o‘ynalgan o‘yinlar</h2>
+                    </div>
+                    <div class="recent-games-slider" id="recent-games-list"></div>
+                </div>
+
+                <!-- Games Filter & Control Bar -->
+                <div class="games-controls-bar">
+                    <div class="catalog-heading-wrap">
+                        <h2 class="section-title" id="catalog-title">🎮 O‘yinlar Katalogi</h2>
+                        <span class="catalog-subtitle" id="catalog-count">40 ta o‘yin</span>
+                    </div>
+
+                    <div class="catalog-filters">
+                        <!-- Difficulty Filter -->
+                        <div class="filter-dropdown-wrap">
+                            <label for="difficulty-filter" class="filter-label">Qiyinlik:</label>
+                            <select id="difficulty-filter" class="custom-select">
+                                <option value="all">Barcha darajalar</option>
+                                <option value="easy">Oson (Easy)</option>
+                                <option value="medium">O‘rtacha (Medium)</option>
+                                <option value="hard">Qiyin (Hard)</option>
+                                <option value="expert">Ekspert (Expert)</option>
+                            </select>
+                        </div>
+
+                        <!-- Reset / View All -->
+                        <button id="reset-filters-btn" class="btn-ghost-sm hidden">Filtrni tozalash</button>
+                    </div>
+                </div>
+
+                <!-- Games Grid (40 Games) -->
+                <div class="games-grid" id="games-grid">
+                    <!-- Populated dynamically by games.js -->
+                </div>
+
+                <!-- Empty State for Search / Filter -->
+                <div class="empty-state hidden" id="games-empty-state">
+                    <div class="empty-icon">🔍</div>
+                    <h3>Mos keluvchi o‘yin topilmadi</h3>
+                    <p>Iltimos, qidiruv so‘zini o‘zgartiring yoki filtrlarni tozalang.</p>
+                    <button class="btn-primary-sm" id="empty-reset-btn">Barcha o‘yinlarni ko‘rsatish</button>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- GAME ARENA MODAL (Full Screen Playable Surface) -->
+        <div class="game-arena-overlay hidden" id="game-arena-modal" role="dialog" aria-modal="true">
+            <div class="arena-window">
+                
+                <!-- Arena Top Header Bar -->
+                <div class="arena-top-bar">
+                    <div class="arena-left">
+                        <button class="arena-icon-btn" id="arena-back-btn" title="O‘yindan chiqish">
+                            <span>‹</span> Chiqish
+                        </button>
+                        <div class="arena-game-meta">
+                            <span class="arena-game-icon" id="arena-game-icon">🎮</span>
+                            <div>
+                                <h3 class="arena-game-title" id="arena-game-title">O‘yin Nomi</h3>
+                                <span class="arena-game-category" id="arena-game-category">Kategoriya</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Center Stats / HUD -->
+                    <div class="arena-hud">
+                        <div class="hud-box" id="arena-score-box">
+                            <span class="hud-label">Ball</span>
+                            <span class="hud-value" id="arena-score">0</span>
+                        </div>
+                        <div class="hud-box hidden" id="arena-timer-box">
+                            <span class="hud-label">Vaqt</span>
+                            <span class="hud-value" id="arena-timer">60s</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Arena Actions -->
+                    <div class="arena-right">
+                        <button class="arena-icon-btn" id="arena-pause-btn" title="Pauza / Davom ettirish">⏸️</button>
+                        <button class="arena-icon-btn" id="arena-restart-btn" title="Qaytadan boshlash">🔄</button>
+                        <button class="arena-icon-btn" id="arena-hint-btn" title="AI Maslahat olish">💡 Yordam</button>
+                        <button class="arena-icon-btn" id="arena-help-btn" title="Qoidalar">❓ Qoidalar</button>
+                    </div>
+                </div>
+
+                <!-- Mode & Difficulty Selection Bar (Shown before start) -->
+                <div class="arena-pre-game-setup" id="arena-setup-panel">
+                    <div class="setup-container glass-panel">
+                        <h2 class="setup-title">O‘yin Rejimini Tanlang</h2>
+                        
+                        <!-- 4 Game Modes -->
+                        <div class="modes-grid">
+                            <label class="mode-card active" data-mode="alone">
+                                <input type="radio" name="game-mode" value="alone" checked>
+                                <div class="mode-icon">👤</div>
+                                <h4>Play Alone</h4>
+                                <p>Mustaqil o‘ynash, shoshilmasdan o‘z kuchingizni sinang</p>
+                            </label>
+                            <label class="mode-card" data-mode="ai">
+                                <input type="radio" name="game-mode" value="ai">
+                                <div class="mode-icon">🤖</div>
+                                <h4>Play With AI</h4>
+                                <p>AI raqib bilan bellashing va maslahatlar oling</p>
+                            </label>
+                            <label class="mode-card" data-mode="challenge">
+                                <input type="radio" name="game-mode" value="challenge">
+                                <div class="mode-icon">⚡</div>
+                                <h4>Challenge Mode</h4>
+                                <p>Vaqtga qarshi o‘ynang va yuqori rekord o‘rnating</p>
+                            </label>
+                            <label class="mode-card" data-mode="practice">
+                                <input type="radio" name="game-mode" value="practice">
+                                <div class="mode-icon">🎯</div>
+                                <h4>Practice Mode</h4>
+                                <p>Bosqichma-bosqich o‘rganish va mashq qilish</p>
+                            </label>
+                        </div>
+
+                        <!-- AI Difficulty (shown when mode is AI or Challenge) -->
+                        <div class="ai-difficulty-selector" id="ai-diff-row">
+                            <span class="diff-title">AI Qiyinchilik darajasi:</span>
+                            <div class="diff-chips">
+                                <button class="diff-chip" data-diff="easy">Oson (Easy)</button>
+                                <button class="diff-chip active" data-diff="medium">O‘rtacha (Medium)</button>
+                                <button class="diff-chip" data-diff="hard">Qiyin (Hard)</button>
+                                <button class="diff-chip" data-diff="expert">Ekspert (Expert)</button>
+                            </div>
+                        </div>
+
+                        <button class="btn-start-game" id="arena-start-btn">O‘yinni Boshlash ➔</button>
+                    </div>
+                </div>
+
+                <!-- Live AI Coach / Opponent Strip -->
+                <div class="arena-ai-strip hidden" id="arena-ai-strip">
+                    <div class="ai-strip-content">
+                        <div class="ai-strip-avatar" id="arena-ai-avatar">🤖</div>
+                        <div class="ai-strip-meta">
+                            <span class="ai-strip-name" id="arena-ai-name">Robo-Spark</span>
+                            <p class="ai-strip-speech" id="arena-ai-speech">Keling boshladik! Diqqatni jamlang!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Game Play Area (DOM / Canvas injected here) -->
+                <div class="arena-playfield" id="arena-playfield"></div>
+
+                <!-- Pause Overlay -->
+                <div class="arena-pause-overlay hidden" id="arena-pause-overlay">
+                    <div class="pause-card glass-panel">
+                        <h2>⏸️ O‘yin to‘xtatildi</h2>
+                        <p>Nafas rostlab oling va davom eting!</p>
+                        <div class="pause-actions">
+                            <button class="btn-primary" id="pause-resume-btn">Davom ettirish ▶</button>
+                            <button class="btn-secondary" id="pause-restart-btn">Qaytadan boshlash 🔄</button>
+                            <button class="btn-danger-sm" id="pause-quit-btn">Chiqish ✕</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result Screen Modal -->
+                <div class="arena-result-overlay hidden" id="arena-result-overlay">
+                    <div class="result-card glass-panel">
+                        <div class="result-header">
+                            <span class="result-emoji" id="res-emoji">🏆</span>
+                            <h2 class="result-title" id="res-title">G‘alaba!</h2>
+                            <p class="result-subtitle" id="res-subtitle">Ajoyib intellektual natija ko‘rsatdingiz!</p>
+                        </div>
+
+                        <div class="result-score-stats">
+                            <div class="res-stat-box">
+                                <span class="res-stat-label">Yakuniy Ball</span>
+                                <span class="res-stat-value" id="res-score">100</span>
+                            </div>
+                            <div class="res-stat-box">
+                                <span class="res-stat-label">To‘plangan XP</span>
+                                <span class="res-stat-value text-accent" id="res-xp">+45 XP</span>
+                            </div>
+                        </div>
+
+                        <!-- AI Debrief / Mistake Explanation -->
+                        <div class="result-ai-debrief" id="res-ai-debrief">
+                            <div class="debrief-header">
+                                <span id="res-ai-avatar">🤖</span>
+                                <strong>AI Xulosasi:</strong>
+                            </div>
+                            <p id="res-ai-comment">Strategiyangiz a’lo darajada ishladi!</p>
+                        </div>
+
+                        <div class="result-actions">
+                            <button class="btn-primary" id="res-play-again-btn">Yana o‘ynash 🔄</button>
+                            <button class="btn-secondary" id="res-dashboard-btn">Dashboardga qaytish 🏠</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- AUTH & WELCOME MODAL -->
+        <div class="modal-overlay hidden" id="auth-modal" role="dialog" aria-modal="true">
+            <div class="auth-card glass-panel">
+                <div class="auth-header">
+                    <div class="auth-logo-badge">🧠</div>
+                    <h2>Brain Arena ga Xush Kelibsiz!</h2>
+                    <p>Miyangizni mashq qiling, AI bilan bellashing va yangi cho‘qqilarni zabt eting!</p>
+                </div>
+
+                <!-- Profile Switcher Tabs (if existing users exist) -->
+                <div class="profile-tabs hidden" id="profile-tabs-row">
+                    <button class="profile-tab-btn active" id="tab-login-btn">Profilni tanlash</button>
+                    <button class="profile-tab-btn" id="tab-create-btn">+ Yangi profil</button>
+                </div>
+
+                <!-- Existing Profiles List -->
+                <div class="existing-profiles-view hidden" id="existing-profiles-view">
+                    <div class="profiles-list-scroll" id="profiles-list-container"></div>
+                </div>
+
+                <!-- Registration Form -->
+                <form id="auth-form" class="auth-form" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="reg-username">Foydalanuvchi nomi (Username) <span class="required">*</span></label>
+                        <input type="text" id="reg-username" class="form-input" placeholder="Ismingiz yoki laqabingizni kiriting..." required minlength="2" maxlength="20" autocomplete="off">
+                        <span class="input-hint" id="username-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-age">Yoshingiz <span class="required">*</span></label>
+                        <input type="number" id="reg-age" class="form-input" placeholder="Yoshingizni kiriting (masalan: 8, 14, 18)" required min="3" max="99">
+                        <div class="age-category-preview" id="age-category-preview">
+                            <span class="preview-badge" id="preview-cat-badge">🧸 Preschool (3–5 yosh)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Avatar tanlang:</label>
+                        <div class="avatar-selection-grid" id="avatar-grid">
+                            <!-- Avatars generated via JS -->
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-block" id="reg-submit-btn">Platformaga Kirish 🚀</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- USER PROFILE & SWITCH MODAL -->
+        <div class="modal-overlay hidden" id="profile-modal" role="dialog" aria-modal="true">
+            <div class="profile-modal-card glass-panel">
+                <div class="modal-close-bar">
+                    <h3>Foydalanuvchi Profili</h3>
+                    <button class="close-modal-btn" id="close-profile-btn">✕</button>
+                </div>
+                <div class="profile-modal-body">
+                    <div class="profile-header-meta">
+                        <span class="profile-big-avatar" id="pm-avatar">🦊</span>
+                        <div>
+                            <h2 id="pm-username">Foydalanuvchi</h2>
+                            <span class="user-category-chip" id="pm-category">Kids (6–10 yosh)</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-stats-grid">
+                        <div class="pm-stat-box">
+                            <span class="pm-val text-accent" id="pm-xp">0</span>
+                            <span class="pm-lbl">Umumiy XP</span>
+                        </div>
+                        <div class="pm-stat-box">
+                            <span class="pm-val" id="pm-level">Beginner</span>
+                            <span class="pm-lbl">Daraja</span>
+                        </div>
+                        <div class="pm-stat-box">
+                            <span class="pm-val text-success" id="pm-wins">0</span>
+                            <span class="pm-lbl">G‘alabalar</span>
+                        </div>
+                        <div class="pm-stat-box">
+                            <span class="pm-val" id="pm-games">0</span>
+                            <span class="pm-lbl">O‘yinlar</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-modal-actions">
+                        <button class="btn-secondary" id="pm-switch-user-btn">Boshqa profilga o‘tish 👥</button>
+                        <button class="btn-primary" id="pm-new-user-btn">+ Yangi profil yaratish</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACHIEVEMENTS MODAL -->
+        <div class="modal-overlay hidden" id="achievements-modal" role="dialog" aria-modal="true">
+            <div class="achievements-modal-card glass-panel">
+                <div class="modal-close-bar">
+                    <h3>🏆 Yutuqlar va Mukofotlar</h3>
+                    <button class="close-modal-btn" id="close-achievements-btn">✕</button>
+                </div>
+                <div class="achievements-content">
+                    <p class="achievements-intro">O‘yinlarda g‘alaba qozoning, rekordlar o‘rnating va barcha sovrinlarni oching!</p>
+                    <div class="achievements-grid" id="achievements-container">
+                        <!-- Loaded by storageManager & dashboard.js -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAME INSTRUCTIONS MODAL -->
+        <div class="modal-overlay hidden" id="instructions-modal" role="dialog" aria-modal="true">
+            <div class="instructions-modal-card glass-panel">
+                <div class="modal-close-bar">
+                    <h3 id="inst-game-title">O‘yin Qoidalari</h3>
+                    <button class="close-modal-btn" id="close-instructions-btn">✕</button>
+                </div>
+                <div class="instructions-body">
+                    <div class="inst-icon-wrap" id="inst-game-icon">🎮</div>
+                    <h4>Qanday o‘ynaladi?</h4>
+                    <p id="inst-game-rules"></p>
+                    <h4>AI Qobiliyatlari:</h4>
+                    <p id="inst-ai-desc"></p>
+                    <button class="btn-primary" id="inst-ok-btn">Tushunarli, O‘ynaymiz! 👍</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOAST NOTIFICATION CONTAINER -->
+        <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script src="js/sounds.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ai-engine.js"></script>
+    <script src="js/games/preschool.js"></script>
+    <script src="js/games/kids.js"></script>
+    <script src="js/games/teens.js"></script>
+    <script src="js/games/young-adults.js"></script>
+    <script src="js/games.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
